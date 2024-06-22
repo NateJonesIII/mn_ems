@@ -1,0 +1,7 @@
+<!-- templates/events/home.html -->
+{% extends "events/base.html" %} {% block content %}
+
+<h1>Manage your events efficiently and effectively.</h1>
+<a href="{% url 'event_list' %}">View All Events</a>
+<a href="{% url 'create_event' %}">Create New Event</a>
+{% endblock %}

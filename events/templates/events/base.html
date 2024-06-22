@@ -1,0 +1,50 @@
+<!-- templates/events/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MN the event ems</title>
+    {% load static %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style_comp.css' %}"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen flex flex-col bg-fuchsia-200">
+    <header>
+      <nav class="bg-zinc-50 align-top mt-0 shadow">
+        <div class="container mx-auto px-4">
+          <div class="flex justify-between items-center py-4">
+            <a href="{% url 'home' %}" class="flex items-center">
+              <img
+                src="{% static '/images/mn_logo_nb.png' %}"
+                alt="Logo"
+                class="h-20 mr-3"
+              />
+              <span class="text-lg font-semibold">Event Management System</span>
+            </a>
+            <div class="text-slate-100">
+              <a href="{% url 'home' %}" class="mr-4">Home</a>
+              <a href="{% url 'event_list' %}" class="mr-4">Events</a>
+              <a href="{% url 'create_event' %}">Create Event</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="flex-grow container mx-auto py-8">
+      {% block content %} {% endblock %}
+    </main>
+    <footer class="bg-pink-500 shadow py-4 mt-8">
+      <div class="container mx-auto text-center">
+        <p text-slate-100>&copy; 2024 Event Management System</p>
+      </div>
+    </footer>
+  </body>
+</html>

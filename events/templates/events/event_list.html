@@ -1,0 +1,16 @@
+<!-- templates/events/event_list.html -->
+{% extends "events/base.html" %} {% block content %}
+<h1>All Events</h1>
+<ul>
+  {% for event in events %}
+  <li>
+    <a href="{% url 'event_detail' event.id %}">{{ event.title }}</a>
+    ({{ event.date }})
+  </li>
+  {% empty %}
+  <li>No events available.</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'create_event' %}">Create New Event</a>
+<a href="{% url 'home' %}">Home</a>
+{% endblock %}

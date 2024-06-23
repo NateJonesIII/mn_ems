@@ -1,4 +1,14 @@
 {
+  "name": "MN EMS",
+  "version": "1.0.0",
+  "description": "Your project description",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss build src/styles.css -o static/css/tailwind.css"
+  },
+  "dependencies": {
+    "tailwindcss": "^2.1.2"
+  },
   "devDependencies": {
     "tailwindcss": "^3.4.4"
   }

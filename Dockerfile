@@ -1,25 +1,51 @@
-# For more information, please refer to https://aka.ms/vscode-docker-python
-FROM python:3-slim
+# Dockerfile
 
-EXPOSE 5000
+# Use the official Python image from the Docker Hub
+FROM python:3.9-slim
 
-# Keeps Python from generating .pyc files in the container
-ENV PYTHONDONTWRITEBYTECODE=1
+# Set environment variables for Python
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# Turns off buffering for easier container logging
-ENV PYTHONUNBUFFERED=1
-
-# Install pip requirements
-COPY requirements.txt .
-RUN python -m pip install -r requirements.txt
-
+# Set working directory in the container
 WORKDIR /app
-COPY . /app
 
-# Creates a non-root user with an explicit UID and adds permission to access the /app folder
-# For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
-RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
-USER appuser
+# Install system dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    gcc \
+    libpq-dev \
+    nodejs \
+    npm \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "event_management_system.wsgi:application"]
+# Install Python dependencies
+COPY requirements.txt /app/
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+# Copy package.json and package-lock.json and install npm dependencies
+COPY package.json package-lock.json /app/
+RUN npm install
+
+# Copy Tailwind CSS input file and config file
+COPY src/styles.css /app/src/styles.css
+COPY tailwind.config.js /app/tailwind.config.js
+
+# Build Tailwind CSS
+RUN npx tailwindcss -i ./src/styles.css -o ./static/css/tailwind.css
+
+# Copy the rest of the project files into the container
+COPY . /app/
+
+# Collect static files
+RUN python manage.py collectstatic --noinput
+
+# Run Django migrations
+RUN python manage.py migrate
+
+# Expose port 8000 to the outside world
+EXPOSE 8000
+
+# Command to run the application
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

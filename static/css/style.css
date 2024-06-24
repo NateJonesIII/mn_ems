@@ -1,8 +1,4 @@
 /* static/css/style.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
     font-family: 'Arial', sans-serif;
 }
@@ -10,7 +6,6 @@ body {
 .header, .footer {
     padding: 1rem;
 }
-
-.footer {
-    background-color: #f8f9fa;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

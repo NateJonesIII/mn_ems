@@ -1,7 +1,86 @@
 <!-- templates/events/home.html -->
-{% extends "events/base.html" %} {% block content %}
+{% extends "events/base.html" %}{% load static %} {% block content %}
+<div class="bg-gray-100 rounded-lg">
+  <!-- Hero Section -->
+  <div class="relative rounded-lg bg-gray-800">
+    <div
+      class="w-full h-64 flex items-center rounded-lg justify-center text-center text-white bg-cover bg-center bg-no-repeat"
+      style="background-image: url('{% static "images/mia_bg_dusk.jpg" %}')"
+    >
+      <div class="rounded-lg absolute inset-0 bg-gray-900 opacity-50"></div>
+      <div class="relative z-10">
+        <h1 class="text-5xl font-bold mb-4">
+          Welcome to MN Event Management System
+        </h1>
+        <p class="text-lg mb-8">Mn😏 the event. Are you?</p>
+        <a
+          href="{% url 'accounts:user_login' %}"
+          class="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg font-semibold hover:bg-blue-700"
+          >Login</a
+        >
+        <a
+          href="{% url 'accounts:user_register' %}"
+          class="inline-block px-6 py-3 ml-4 bg-gray-300 text-gray-800 rounded-lg shadow-lg font-semibold hover:bg-gray-400"
+          >Register</a
+        >
+      </div>
+    </div>
+  </div>
 
-<h1>Manage your events efficiently and effectively.</h1>
-<a href="{% url 'event_list' %}">View All Events</a>
-<a href="{% url 'create_event' %}">Create New Event</a>
+  <!-- Benefits Section -->
+  <div class="py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-gray-900">
+          Why Create an Account?
+        </h2>
+        <p class="mt-4 text-lg text-gray-600">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+          vitae purus in dolor consectetur blandit non vel odio.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <div class="flex flex-wrap -mx-4">
+          <!-- Benefit Card 1 -->
+          <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">
+                Easy Event Management
+              </h3>
+              <p class="text-gray-600">
+                Manage your events effortlessly with our intuitive interface.
+              </p>
+            </div>
+          </div>
+
+          <!-- Benefit Card 2 -->
+          <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">
+                Attend Exciting Events
+              </h3>
+              <p class="text-gray-600">
+                Explore and attend a variety of events tailored to your
+                interests.
+              </p>
+            </div>
+          </div>
+
+          <!-- Benefit Card 3 -->
+          <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">
+                Connect with Community
+              </h3>
+              <p class="text-gray-600">
+                Join a vibrant community of event organizers and attendees.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

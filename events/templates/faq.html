@@ -1,0 +1,112 @@
+{% extends "events/base.html" %} {% block content %}
+<div class="container mx-auto px-4">
+  <div class="py-8">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+
+      <div class="space-y-4">
+        <!-- Question 1 -->
+        <div class="bg-white shadow-sm rounded-lg">
+          <div class="p-4 border-b">
+            <button
+              class="w-full text-left font-semibold text-lg focus:outline-none"
+              data-toggle="collapse"
+              data-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              How do I create an event?
+            </button>
+          </div>
+          <div id="collapseOne" class="collapse show" data-parent="#accordion">
+            <div class="p-4">
+              <p class="text-gray-700">
+                To create an event, go to your profile dashboard and click on
+                the "Create Event" button. Fill out the required information
+                such as event name, date, location, and description. Once
+                submitted, your event will be listed on the platform.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="bg-white shadow-sm rounded-lg">
+          <div class="p-4 border-b">
+            <button
+              class="w-full text-left font-semibold text-lg focus:outline-none"
+              data-toggle="collapse"
+              data-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              How can I edit or update my event details?
+            </button>
+          </div>
+          <div id="collapseTwo" class="collapse" data-parent="#accordion">
+            <div class="p-4">
+              <p class="text-gray-700">
+                You can edit your event details by visiting your event's page
+                from your dashboard. Click on the "Edit" button next to your
+                event and update the necessary information such as date, time,
+                or description. Remember to save your changes.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="bg-white shadow-sm rounded-lg">
+          <div class="p-4 border-b">
+            <button
+              class="w-full text-left font-semibold text-lg focus:outline-none"
+              data-toggle="collapse"
+              data-target="#collapseThree"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              How do I delete an event?
+            </button>
+          </div>
+          <div id="collapseThree" class="collapse" data-parent="#accordion">
+            <div class="p-4">
+              <p class="text-gray-700">
+                To delete an event, navigate to your event's page from your
+                dashboard. Click on the "Delete" button, confirm your decision,
+                and your event will be removed from the platform. Please note
+                that this action cannot be undone.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="bg-white shadow-sm rounded-lg">
+          <div class="p-4 border-b">
+            <button
+              class="w-full text-left font-semibold text-lg focus:outline-none"
+              data-toggle="collapse"
+              data-target="#collapseFour"
+              aria-expanded="false"
+              aria-controls="collapseFour"
+            >
+              How can I view events I'm attending?
+            </button>
+          </div>
+          <div id="collapseFour" class="collapse" data-parent="#accordion">
+            <div class="p-4">
+              <p class="text-gray-700">
+                You can view events you're attending by going to your profile
+                page and selecting the "Events Attending" tab. Here, you'll find
+                a list of events you've RSVP'd to or registered for.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add more FAQ items as needed -->
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

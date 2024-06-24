@@ -1,4 +1,16 @@
 /* src/styles.css */
 @tailwind base;
 @tailwind components;
+body {
+    font-family: "DIN Alternate", sans-serif;
+}
+.glow-pink:hover {
+    @apply text-pink-500;
+    text-shadow: 0 0 8px #ff69b4;
+  }
+  
+  .glow-blue:hover {
+    @apply text-blue-500;
+    text-shadow: 0 0 8px #387e9b;
+  }
 @tailwind utilities;

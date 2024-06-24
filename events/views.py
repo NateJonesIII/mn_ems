@@ -42,3 +42,7 @@ def delete_event(request, event_id):
         event.delete()
         return redirect('event_list')
     return render(request, 'events/event_confirm_delete.html', {'event': event})
+
+def faq_view(request):
+    # Define logic for FAQ page here
+    return render(request, 'faq.html')  # Replace with your FAQ template name

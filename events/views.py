@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Event
 from .forms import EventForm
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'events/home.html')
@@ -15,11 +16,14 @@ def event_detail(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     return render(request, 'events/event_detail.html', {'event': event})
 
+@login_required
 def create_event(request):
     if request.method == 'POST':
         form = EventForm(request.POST)
         if form.is_valid():
-            form.save()
+            event = form.save(commit=False)
+            event.user = request.user  # Assign the logged-in user
+            event.save()
             return redirect('event_list')
     else:
         form = EventForm()

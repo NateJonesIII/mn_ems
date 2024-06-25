@@ -38,17 +38,30 @@
                 alt="Logo"
                 class="h-20 mr-3"
               />
-              <span class="text-lg font-semibold text-white"
-                >Event Management System</span
-              >
+              <span class="text-lg font-semibold text-white">EMS</span>
             </a>
             <div class="text-white">
               <a href="{% url 'home' %}" class="mr-4 glow-pink">Home</a>
               <a href="{% url 'event_list' %}" class="mr-4 glow-blue">Events</a>
+              <a href="{% url 'faq' %}" class="glow-blue">FAQ</a>
+              {% if user.is_authenticated %}
+              <a href="{% url 'accounts:user_profile' %}" class="mr-4 glow-pink"
+                >Profile</a
+              >
               <a href="{% url 'create_event' %}" class="mr-4 glow-pink"
                 >Create Event</a
               >
-              <a href="{% url 'faq' %}" class="glow-blue">FAQ</a>
+              <a href="{% url 'accounts:user_logout' %}" class="glow-blue"
+                >Logout</a
+              >
+              {% else %}
+              <a href="{% url 'accounts:user_login' %}" class="mr-4 glow-pink"
+                >Login</a
+              >
+              <a href="{% url 'accounts:user_register' %}" class="glow-blue"
+                >Register</a
+              >
+              {% endif %}
             </div>
           </div>
         </div>
@@ -57,9 +70,7 @@
     <main class="flex-grow container mx-auto py-8">
       {% block content %} {% endblock %}
     </main>
-    <footer
-      class="bg-pink-500 rounded-t-lg shadow-md font-bold shadow py-6 mt-8"
-    >
+    <footer class="bg-pink-500 rounded-t-lg shadow-md font-bold py-6 mt-8">
       <div class="container mx-auto text-center text-white">
         <div class="flex justify-center space-x-6 mb-4">
           <a href="{% url 'accounts:user_login' %}" class="hover:text-blue-400"

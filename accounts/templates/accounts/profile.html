@@ -1,0 +1,55 @@
+<!-- templates/accounts/profile.html -->
+{% extends "events/base.html" %} {% load static %} {% block content %}
+<div class="container mx-auto py-12">
+  <div
+    class="relative bg-cover bg-center h-64 rounded-lg shadow-lg overflow-hidden"
+    style="background-image: url('{% static 'images/mia_bg_p.jpg' %}')"
+  >
+    <div
+      class="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center"
+    >
+      <h1 class="text-4xl font-bold text-white glowing-text">Profile</h1>
+    </div>
+  </div>
+
+  <div class="mt-8 flex flex-col items-center">
+    {% if user.profile.profile_picture %}
+    <img
+      src="{{ user.profile.profile_picture.url }}"
+      alt="Profile Picture"
+      class="w-32 h-32 rounded-full mb-4 shadow-lg object-cover"
+    />
+    {% else %}
+    <div
+      class="w-32 h-32 rounded-full bg-gray-300 flex items-center justify-center mb-4 shadow-lg"
+    >
+      <span class="text-2xl text-gray-500">P</span>
+    </div>
+    {% endif %}
+
+    <div class="bg-white w-full max-w-3xl rounded-lg shadow-lg p-6">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">User Details</h2>
+      <p class="text-gray-600">
+        <strong>Username:</strong> {{ user.username }}
+      </p>
+      <p class="text-gray-600"><strong>Email:</strong> {{ user.email }}</p>
+      <p class="text-gray-600">
+        <strong>First Name:</strong> {{ user.first_name }}
+      </p>
+      <p class="text-gray-600">
+        <strong>Last Name:</strong> {{ user.last_name }}
+      </p>
+
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %} {{ form.as_p }}
+        <button
+          type="submit"
+          class="px-4 py-2 bg-blue-500 text-white font-semibold rounded shadow hover:bg-blue-600 mt-4"
+        >
+          Update Profile
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

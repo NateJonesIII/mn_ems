@@ -5,7 +5,7 @@ from django.utils.timezone import now
 
 class Event(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField(null=True, blank=True)
+    description = models.TextField(null=True,blank=True)
     date = models.DateTimeField()
     category = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

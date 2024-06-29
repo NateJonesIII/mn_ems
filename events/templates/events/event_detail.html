@@ -1,17 +1,71 @@
 <!-- templates/events/event_detail.html -->
 {% extends "events/base.html" %} {% block content %}
-<h1>{{ event.title }}</h1>
-<p>{{ event.description }}</p>
-<p>Date: {{ event.date }}</p>
-<p>Category: {{ event.category }}</p>
-<a href="{% url 'edit_event' event.id %}">Edit Event</a>
-<form
-  action="{% url 'delete_event' event.id %}"
-  method="post"
-  style="display: inline"
->
-  {% csrf_token %}
-  <button type="submit">Delete Event</button>
-</form>
-<a href="{% url 'event_list' %}">Back to Events</a>
+<div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg px-8 py-6 mb-6">
+  <h1 class="text-3xl font-bold mb-4">{{ event.title }}</h1>
+  <p class="text-gray-700 mb-4">
+    <span class="font-bold">Description:</span> {{ event.description }}
+  </p>
+  <div class="flex items-center mb-4">
+    <svg
+      class="w-5 h-5 text-gray-600 mr-2"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M19 14.828V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v9.828a2 2 0 0 0 .586 1.414l7.585 7.586a2 2 0 0 0 2.828 0l7.586-7.586a2 2 0 0 0 .586-1.414z"
+      ></path>
+    </svg>
+    <p class="text-gray-600">{{ event.date }}</p>
+  </div>
+  <div class="flex items-center mb-4">
+    <svg
+      class="w-5 h-5 text-gray-600 mr-2"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M9 19V5l12-2v14"
+      ></path>
+    </svg>
+    <p class="text-gray-600">{{ event.category }}</p>
+  </div>
+
+  <div class="flex space-x-4">
+    <a
+      href="{% url 'edit_event' event.id %}"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    >
+      Edit Event
+    </a>
+    <form
+      action="{% url 'delete_event' event.id %}"
+      method="post"
+      style="display: inline"
+    >
+      {% csrf_token %}
+      <button
+        type="submit"
+        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      >
+        Delete Event
+      </button>
+    </form>
+    <a
+      href="{% url 'event_list' %}"
+      class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    >
+      Back to Events
+    </a>
+  </div>
+</div>
 {% endblock %}

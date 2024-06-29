@@ -1,9 +1,9 @@
 alembic==1.13.1
-asgiref==3.2.10
+asgiref==3.6.0  # Updated to match the dependency requirements
 blinker==1.8.2
 click==8.1.7
 colorama==0.4.6
-Django==3.1.1
+Django==3.2.20  # Updated to a version that is compatible with django-browser-reload and other packages
 djangorestframework==3.15.1
 flask==3.0.3
 Flask-Migrate==4.0.7
@@ -23,4 +23,6 @@ typing-extensions==4.12.1
 werkzeug==3.0.3
 zipp==3.19.2
 django-compressor==4.3
-django-tailwind
+django-tailwind==3.3.0
+Pillow
+django-browser-reload==1.6.0  # Ensure compatibility with Django 3.2.20

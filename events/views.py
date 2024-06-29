@@ -5,6 +5,7 @@ from .models import Event
 from .forms import EventForm
 from django.contrib.auth.decorators import login_required
 
+
 def home(request):
     return render(request, 'events/home.html')
 

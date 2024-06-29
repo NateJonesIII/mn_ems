@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm
+from django.urls import reverse, NoReverseMatch
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
@@ -25,13 +26,16 @@ def register_view(request):
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
-#@login_required
+@login_required
 def profile_view(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
-            return redirect('user_profile')  # Redirect to profile view after saving
+            try:
+                return redirect('accounts:user_profile')  # Redirect to profile view after saving
+            except NoReverseMatch:
+                messages.error(request, "Profile updated but could not redirect. Please refresh the page.")
     else:
         form = ProfileForm(instance=request.user.profile)
     

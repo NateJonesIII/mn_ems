@@ -9,8 +9,8 @@ class EventForm(forms.ModelForm):
         widgets = {
             'date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
-'''class RSVPForm(forms.ModelForm):
+class RSVPForm(forms.ModelForm):
     class Meta:
         model = RSVP
         fields = ['status']
-        '''        
+

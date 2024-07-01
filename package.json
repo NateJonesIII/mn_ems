@@ -4,10 +4,11 @@
   "description": "Your project description",
   "main": "index.js",
   "scripts": {
-    "build": "tailwindcss build src/styles.css -o static/css/tailwind.css"
+    "build": "tailwindcss build src/styles.css -o static/css/tailwind.css",
+    "dev": "tailwindcss -i src/styles.css -o static/css/tailwind.css --watch"
   },
   "dependencies": {
-    "tailwindcss": "^2.1.2"
+    "tailwindcss": "^3.4.4"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.4"

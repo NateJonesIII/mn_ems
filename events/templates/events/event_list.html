@@ -1,16 +1,50 @@
-<!-- templates/events/event_list.html -->
-{% extends "events/base.html" %} {% block content %}
-<h1>All Events</h1>
-<ul>
-  {% for event in events %}
-  <li>
-    <a href="{% url 'event_detail' event.id %}">{{ event.title }}</a>
-    ({{ event.date }})
-  </li>
-  {% empty %}
-  <li>No events available.</li>
-  {% endfor %}
-</ul>
-<a href="{% url 'create_event' %}">Create New Event</a>
-<a href="{% url 'home' %}">Home</a>
+{% extends "events/base.html" %}{% load static %} {% block content %}
+<div class="container mx-auto">
+  <div
+    class="bg-cover bg-center py-16 mb-8 rounded-lg text-center"
+    style="background-image: url('{% static 'images/miabch_bg.jpg' %}')"
+  >
+    <h1 class="text-5xl outline-pink font-bold text-white shadow-lg">
+      All Events
+    </h1>
+  </div>
+
+  <div class="flex justify-end mb-6">
+    <a
+      href="{% url 'create_event' %}"
+      class="px-4 py-2 bg-pink-500 text-white font-semibold rounded shadow hover:bg-pink-600"
+      >Create New Event</a
+    >
+  </div>
+
+  {% if events %}
+  <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for event in events %}
+    <li
+      class="bg-white rounded-lg shadow p-6 border border-gray-200 hover:shadow-lg transition"
+    >
+      <a
+        href="{% url 'event_detail' event.id %}"
+        class="text-xl font-semibold text-black hover:text-blue-500"
+      >
+        {{ event.title }}
+      </a>
+      <p class="text-gray-600 mt-2">{{ event.date }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="text-center text-gray-600">
+    <p>No events available.</p>
+  </div>
+  {% endif %}
+
+  <div class="flex justify-center mt-6">
+    <a
+      href="{% url 'home' %}"
+      class="px-4 py-2 bg-blue-500 text-white font-semibold rounded shadow hover:bg-blue-600"
+      >Home</a
+    >
+  </div>
+</div>
 {% endblock %}

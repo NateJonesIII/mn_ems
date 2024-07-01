@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Build paths inside the project like this: BASE_DIR / 'subdir'. orginal code
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 # Define STATIC_ROOT
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'events',
     'tailwind',
     'theme',
+    'accounts'
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -72,7 +74,11 @@ ROOT_URLCONF = 'event_management_system.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        #'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'accounts', 'templates'),
+            os.path.join(BASE_DIR, 'events', 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,7 +133,7 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+#USE_L10N = True
 
 USE_TZ = True
 
@@ -149,3 +155,8 @@ STATICFILES_FINDERS = [
     'compressor.finders.CompressorFinder',
 ]
 NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
+
+# Handle media files
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

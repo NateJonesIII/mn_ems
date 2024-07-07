@@ -20,10 +20,12 @@ The Event Management System is a web application built using Django, designed to
 
 ## Technologies Used
 
-- **Backend Framework:** Django
-- **Frontend Framework:** HTML (with Django templates) and Tailwind CSS for styling
-- **Database:** SQLite (for development, can be swapped with PostgreSQL for production)
-- **Deployment:** Docker and Heroku (or alternative cloud service)
+- **Backend Framework:** `Django`
+- **Frontend Framework:** `HTML` (with Django templates) and `Tailwind` CSS for styling
+- **Database:** `SQLite` (for development, can be swapped with `PostgreSQL` for production)
+- **Deployment:** `Docker` and `Google Cloud Run`(or alternative cloud service)
+- **Version Control:** `Git` and `GitHub` for source code management
+- **Authentication:** Django's built-in authentication system
 
 ## Setup Instructions
 

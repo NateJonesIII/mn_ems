@@ -4,6 +4,14 @@
 
 The Event Management System is a web application built using Django, designed to manage events with functionalities such as creating events, listing events, and viewing event details. This README provides an overview of how to set up and use the application.
 
+## Preview
+
+<img width="500" alt="Tag" src="https://github.com/NateJonesIII/mn_ems/blob/main/document/Header.PNG">
+
+## Live Deployment
+
+[Live_Link!](https://mnems-kw2es23pba-ue.a.run.app)
+
 ## Features
 
 - **Create Events:** Users can create new events by filling out a form with details such as title, description, location, start date, end date, and capacity.

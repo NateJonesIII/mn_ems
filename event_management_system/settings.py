@@ -28,7 +28,8 @@ SECRET_KEY = '88zth2x22jj*0eq9h_dh+#g0h-a&(ns*58(w0hrj!1uq!r-qdv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mnems-kw2es23pba-ue.a.run.app', 'localhost', '127.0.0.1']
+
 
 
 # Application definition

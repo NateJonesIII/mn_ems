@@ -28,9 +28,10 @@ SECRET_KEY = '88zth2x22jj*0eq9h_dh+#g0h-a&(ns*58(w0hrj!1uq!r-qdv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mn-ems-kw2es23pba-uc.a.run.app', 'localhost', '127.0.0.1','0.0.0.0:8000']
+ALLOWED_HOSTS = ['0.0.0.0:8000','mn-ems-kw2es23pba-uc.a.run.app', 'localhost', '127.0.0.1']
 
 
+PORT = os.environ.get('PORT', 8000)
 
 # Application definition
 

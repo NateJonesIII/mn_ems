@@ -29,17 +29,19 @@ def register_view(request):
 @login_required
 def profile_view(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        if form.is_valid():
-            form.save()
-            try:
-                return redirect('accounts:user_profile')  # Redirect to profile view after saving
-            except NoReverseMatch:
-                messages.error(request, "Profile updated but could not redirect. Please refresh the page.")
-    else:
-        form = ProfileForm(instance=request.user.profile)
-    
-    context = {
-        'form': form,
-    }
-    return render(request, 'accounts/profile.html', context)
+        user = request.user
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+
+        if 'profile_picture-clear' in request.POST:
+            user.profile.profile_picture.delete()
+        elif 'profile_picture' in request.FILES:
+            user.profile.profile_picture = request.FILES['profile_picture']
+
+        user.save()
+        user.profile.save()
+
+        messages.success(request, 'Your profile has been updated successfully!')
+        return redirect('accounts:user_profile')
+
+    return render(request, 'accounts/profile.html')

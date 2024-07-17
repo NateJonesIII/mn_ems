@@ -1,5 +1,7 @@
 <!-- templates/events/home.html -->
-{% extends "events/base.html" %}{% load static %} {% block content %}
+{% extends "events/base.html" %}
+{% load static %}
+{% block content %}
 <div class="bg-gray-100 rounded-lg">
   <!-- Hero Section -->
   <div class="relative rounded-lg bg-gray-800">
@@ -13,16 +15,24 @@
           Welcome to MN Event Management System
         </h1>
         <p class="text-lg mb-8">Mn😏 the event. Are you?</p>
-        <a
-          href="{% url 'accounts:user_login' %}"
-          class="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg font-semibold hover:bg-blue-700"
-          >Login</a
-        >
-        <a
-          href="{% url 'accounts:user_register' %}"
-          class="inline-block px-6 py-3 ml-4 bg-gray-300 text-gray-800 rounded-lg shadow-lg font-semibold hover:bg-gray-400"
-          >Register</a
-        >
+        {% if user.is_authenticated %}
+          <a
+            href="{% url 'create_event' %}"
+            class="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg font-semibold hover:bg-blue-700"
+            >Create Event</a
+          >
+        {% else %}
+          <a
+            href="{% url 'accounts:user_login' %}"
+            class="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg font-semibold hover:bg-blue-700"
+            >Login</a
+          >
+          <a
+            href="{% url 'accounts:user_register' %}"
+            class="inline-block px-6 py-3 ml-4 bg-gray-300 text-gray-800 rounded-lg shadow-lg font-semibold hover:bg-gray-400"
+            >Register</a
+          >
+        {% endif %}
       </div>
     </div>
   </div>
@@ -31,13 +41,21 @@
   <div class="py-12">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-gray-900">
-          Why Create an Account?
-        </h2>
-        <p class="mt-4 text-lg text-gray-600">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-          vitae purus in dolor consectetur blandit non vel odio.
-        </p>
+        {% if user.is_authenticated %}
+          <h2 class="text-3xl font-extrabold text-gray-900">
+            Thank You for Being a Part of the Community
+          </h2>
+          <p class="mt-4 text-lg text-gray-600">
+            Explore your dashboard to manage your events, connect with others, and discover new opportunities.
+          </p>
+        {% else %}
+          <h2 class="text-3xl font-extrabold text-gray-900">
+            Why Create an Account?
+          </h2>
+          <p class="mt-4 text-lg text-gray-600">
+            Join the vibrant event management experience! Connect, create, and celebrate with ease.
+          </p>
+        {% endif %}
       </div>
 
       <div class="mt-10">
@@ -45,37 +63,63 @@
           <!-- Benefit Card 1 -->
           <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
             <div class="bg-white rounded-lg shadow-lg p-6">
-              <h3 class="text-xl font-semibold text-gray-800 mb-4">
-                Easy Event Management
-              </h3>
-              <p class="text-gray-600">
-                Manage your events effortlessly with our intuitive interface.
-              </p>
+              {% if user.is_authenticated %}
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">
+                  Manage Your Events
+                </h3>
+                <p class="text-gray-600">
+                  Easily create, update, and manage your events through your personalized dashboard.
+                </p>
+              {% else %}
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">
+                  Easy Event Management
+                </h3>
+                <p class="text-gray-600">
+                  Manage your events effortlessly with our intuitive interface.
+                </p>
+              {% endif %}
             </div>
           </div>
 
           <!-- Benefit Card 2 -->
           <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
             <div class="bg-white rounded-lg shadow-lg p-6">
-              <h3 class="text-xl font-semibold text-gray-800 mb-4">
-                Attend Exciting Events
-              </h3>
-              <p class="text-gray-600">
-                Explore and attend a variety of events tailored to your
-                interests.
-              </p>
+              {% if user.is_authenticated %}
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">
+                  Discover Events
+                </h3>
+                <p class="text-gray-600">
+                  Find and attend exciting events tailored to your interests and connect with other attendees.
+                </p>
+              {% else %}
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">
+                  Attend Exciting Events
+                </h3>
+                <p class="text-gray-600">
+                  Explore and attend a variety of events tailored to your interests.
+                </p>
+              {% endif %}
             </div>
           </div>
 
           <!-- Benefit Card 3 -->
           <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
             <div class="bg-white rounded-lg shadow-lg p-6">
-              <h3 class="text-xl font-semibold text-gray-800 mb-4">
-                Connect with Community
-              </h3>
-              <p class="text-gray-600">
-                Join a vibrant community of event organizers and attendees.
-              </p>
+              {% if user.is_authenticated %}
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">
+                  Connect with Community
+                </h3>
+                <p class="text-gray-600">
+                  Engage with a diverse vibrant community of event organizers and attendees.
+                </p>
+              {% else %}
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">
+                  Connect with Community
+                </h3>
+                <p class="text-gray-600">
+                  Join a vibrant community of event organizers and attendees.
+                </p>
+              {% endif %}
             </div>
           </div>
         </div>

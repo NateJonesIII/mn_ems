@@ -14,6 +14,11 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+
     <style>
       .glow-pink:hover {
         @apply text-pink-500;
@@ -40,7 +45,7 @@
               />
               <span class="text-lg font-semibold text-white">EMS</span>
             </a>
-            <div class="text-white">
+            <div class="text-white hidden md:flex">
               <a href="{% url 'home' %}" class="mr-4 glow-pink">Home</a>
               <a href="{% url 'event_list' %}" class="mr-4 glow-blue">Events</a>
               <a href="{% url 'faq' %}" class="mr-4 glow-blue">FAQ</a>
@@ -63,7 +68,76 @@
               >
               {% endif %}
             </div>
+            <div class="md:hidden">
+              <button
+                id="mobile-menu-button"
+                class="text-white focus:outline-none"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h16m-7 6h7"
+                  ></path>
+                </svg>
+              </button>
+            </div>
           </div>
+        </div>
+        <div
+          id="mobile-menu"
+          class="fixed inset-0 bg-black bg-opacity-90 flex flex-col justify-center items-center hidden md:hidden z-50"
+        >
+          <a
+            href="{% url 'home' %}"
+            class="block px-4 py-2 text-white glow-pink text-2xl"
+            >Home</a
+          >
+          <a
+            href="{% url 'event_list' %}"
+            class="block px-4 py-2 text-white glow-blue text-2xl"
+            >Events</a
+          >
+          <a
+            href="{% url 'faq' %}"
+            class="block px-4 py-2 text-white glow-blue text-2xl"
+            >FAQ</a
+          >
+          {% if user.is_authenticated %}
+          <a
+            href="{% url 'accounts:user_profile' %}"
+            class="block px-4 py-2 text-white glow-pink text-2xl"
+            >Profile</a
+          >
+          <a
+            href="{% url 'create_event' %}"
+            class="block px-4 py-2 text-white glow-pink text-2xl"
+            >Create Event</a
+          >
+          <a
+            href="{% url 'accounts:user_logout' %}"
+            class="block px-4 py-2 text-white glow-blue text-2xl"
+            >Logout</a
+          >
+          {% else %}
+          <a
+            href="{% url 'accounts:user_login' %}"
+            class="block px-4 py-2 text-white glow-pink text-2xl"
+            >Login</a
+          >
+          <a
+            href="{% url 'accounts:user_register' %}"
+            class="block px-4 py-2 text-white glow-blue text-2xl"
+            >Register</a
+          >
+          {% endif %}
         </div>
       </nav>
     </header>
@@ -84,6 +158,7 @@
     </main>
     <footer class="bg-pink-500 rounded-t-lg shadow-md font-bold py-6 mt-8">
       <div class="container mx-auto text-center text-white">
+        {% if not user.is_authenticated %}
         <div class="flex justify-center space-x-6 mb-4">
           <a href="{% url 'accounts:user_login' %}" class="hover:text-blue-400"
             >Login</a
@@ -94,8 +169,17 @@
             >Register</a
           >
         </div>
+        {% endif %}
         <p class="text-sm">&copy; 2024 MN EMS. All rights reserved.</p>
       </div>
     </footer>
+    <script>
+      document
+        .getElementById("mobile-menu-button")
+        .addEventListener("click", function () {
+          var menu = document.getElementById("mobile-menu");
+          menu.classList.toggle("hidden");
+        });
+    </script>
   </body>
 </html>

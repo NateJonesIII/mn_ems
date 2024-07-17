@@ -1,70 +1,206 @@
 <!-- templates/accounts/profile.html -->
 {% extends "events/base.html" %} {% load static %} {% block content %}
-<div class="container mx-auto">
-  <div
-    class="relative bg-cover bg-center h-64 rounded-lg shadow-lg overflow-hidden"
-    style="background-image: url('{% static 'images/mia_bg_p.jpg' %}')"
-  >
-    <div
-      class="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center"
-    >
-      <h1 class="text-4xl font-bold text-white glowing-text">Profile</h1>
-    </div>
-  </div>
+<div class="container mx-auto flex">
+  <aside class="w-1/4 bg-gray-100 p-4 rounded-lg shadow-lg">
+    <nav>
+      <ul class="space-y-2">
+        <li>
+          <a
+            href="#"
+            class="block px-4 py-2 text-black font-semibold rounded hover:bg-gray-200"
+            onclick="showContent('profile')"
+            >Profile</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="block px-4 py-2 text-black font-semibold rounded hover:bg-gray-200"
+            onclick="showContent('appearance')"
+            >Appearance</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="block px-4 py-2 text-black font-semibold rounded hover:bg-gray-200"
+            onclick="showContent('settings')"
+            >Settings</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </aside>
 
-  <div class="mt-8 flex flex-col items-center">
-    {% if user.profile.profile_picture %}
-    <img
-      src="{{ user.profile.profile_picture.url }}"
-      alt="Profile Picture"
-      class="w-32 h-32 rounded-full mb-4 shadow-lg object-cover"
-    />
-    {% else %}
-    <div
-      class="w-32 h-32 rounded-full bg-gray-300 flex items-center justify-center mb-4 shadow-lg"
-    >
-      <span class="text-2xl text-gray-500">P</span>
-    </div>
-    {% endif %}
-
-    <div class="bg-white w-full max-w-3xl rounded-lg shadow-lg p-6">
-      <h2 class="text-2xl font-semibold text-pink-500 mb-4">User Details</h2>
-      <p class="text-black"><strong>Username:</strong> {{ user.username }}</p>
-      <p class="text-black"><strong>Email:</strong> {{ user.email }}</p>
-      <p class="text-black">
-        <strong>First Name:</strong> {{ user.first_name }}
-      </p>
-      <p class="text-black"><strong>Last Name:</strong> {{ user.last_name }}</p>
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        <p>
-          <label for="id_profile_picture"><strong>Profile Pic:</strong></label>
-          <a href="/media/profile_pictures/coder_FbAUGSt.jpg"
-            >profile_pictures/coder_FbAUGSt.jpg</a
-          ><br />
-          <input
-            type="checkbox"
-            name="profile_picture-clear"
-            id="profile_picture-clear_id"
-          />
-          <label for="profile_picture-clear_id">Clear</label><br />
-          <strong>Change:</strong>
-          <input
-            type="file"
-            name="profile_picture"
-            accept="image/*"
-            id="id_profile_picture"
-          />
-        </p>
-        <button
-          type="submit"
-          class="px-4 py-2 bg-pink-500 text-white font-semibold rounded shadow hover:bg-blue-600 mt-4"
+  <div class="w-3/4 ml-4 bg-white rounded-lg shadow-lg p-6">
+    <!-- Profile Content -->
+    <div id="profile-content">
+      <div
+        class="relative bg-cover bg-center h-64 rounded-lg shadow-lg overflow-hidden"
+        style="background-image: url('{% static 'images/mia_bg_p.jpg' %}')"
+      >
+        <div
+          class="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center"
         >
-          Update
-        </button>
-      </form>
+          <h1 class="text-4xl font-bold text-white glowing-text">Profile</h1>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-col items-center">
+        {% if user.profile.profile_picture %}
+        <img
+          src="{{ user.profile.profile_picture.url }}"
+          alt="Profile Picture"
+          class="w-32 h-32 rounded-full mb-4 shadow-lg object-cover"
+        />
+        <h1 class="text-pink-500 text-2xl font-bold">{{ user.username }}</h1>
+        {% else %}
+        <div
+          class="w-32 h-32 rounded-full bg-gray-300 flex items-center justify-center mb-4 shadow-lg"
+        >
+          <span class="text-2xl text-gray-500">P</span>
+        </div>
+        {% endif %}
+
+        <div class="bg-white w-full max-w-3xl rounded-lg shadow-lg p-6">
+          <h2 class="text-2xl font-semibold text-pink-500 mb-4">
+            User Details
+          </h2>
+          <p class="text-black">
+            <strong>Username:</strong> {{ user.username }}
+          </p>
+          <p class="text-black"><strong>Email:</strong> {{ user.email }}</p>
+          <p class="text-black">
+            <strong>First Name:</strong> {{ user.first_name }}
+          </p>
+          <p class="text-black">
+            <strong>Last Name:</strong> {{ user.last_name }}
+          </p>
+
+          <button
+            id="edit-button"
+            class="px-4 py-2 bg-pink-500 text-white font-semibold rounded shadow hover:bg-blue-600 mt-4"
+            onclick="toggleEditForm()"
+          >
+            Edit
+          </button>
+
+          <form
+            id="edit-form"
+            method="post"
+            enctype="multipart/form-data"
+            class="mt-4 hidden"
+          >
+            {% csrf_token %}
+            <div class="mb-4">
+              <label for="id_first_name" class="block text-black font-semibold"
+                >First Name:</label
+              >
+              <input
+                type="text"
+                name="first_name"
+                id="id_first_name"
+                value="{{ user.first_name }}"
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm"
+              />
+            </div>
+            <div class="mb-4">
+              <label for="id_last_name" class="block text-black font-semibold"
+                >Last Name:</label
+              >
+              <input
+                type="text"
+                name="last_name"
+                id="id_last_name"
+                value="{{ user.last_name }}"
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm"
+              />
+            </div>
+            <div class="mb-4">
+              <label
+                for="id_profile_picture"
+                class="block text-black font-semibold"
+                >Profile Picture:</label
+              >
+              {% if user.profile.profile_picture %}
+              <div class="mb-2">
+                <img
+                  src="{{ user.profile.profile_picture.url }}"
+                  alt="Profile Picture"
+                  class="w-32 h-32 rounded-full mb-4 shadow-lg object-cover"
+                />
+              </div>
+              {% endif %}
+              <input
+                type="file"
+                name="profile_picture"
+                accept="image/*"
+                id="id_profile_picture"
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm"
+              />
+              <div class="mt-2">
+                <input
+                  type="checkbox"
+                  name="profile_picture-clear"
+                  id="profile_picture-clear_id"
+                />
+                <label for="profile_picture-clear_id" class="text-black"
+                  >Clear</label
+                >
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="px-4 py-2 bg-pink-500 text-white font-semibold rounded shadow hover:bg-blue-600 mt-4"
+            >
+              Update
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Appearance Content -->
+    <div id="appearance-content" class="hidden">
+      <h2 class="text-2xl font-semibold text-pink-500 mb-4">
+        Appearance Settings Coming Soon!
+      </h2>
+      <p class="text-black">Placeholder content for appearance settings.</p>
+    </div>
+
+    <!-- Settings Content -->
+    <div id="settings-content" class="hidden">
+      <h2 class="text-2xl font-semibold text-pink-500 mb-4">
+        Settings Coming Soon!
+      </h2>
+      <p class="text-black">Placeholder content for settings.</p>
     </div>
   </div>
 </div>
+
+<script>
+  function toggleEditForm() {
+    var form = document.getElementById("edit-form");
+    var button = document.getElementById("edit-button");
+    if (form.classList.contains("hidden")) {
+      form.classList.remove("hidden");
+      button.textContent = "Cancel";
+    } else {
+      form.classList.add("hidden");
+      button.textContent = "Edit";
+    }
+  }
+
+  function showContent(section) {
+    var sections = ["profile", "appearance", "settings"];
+    sections.forEach(function (sec) {
+      var content = document.getElementById(sec + "-content");
+      if (sec === section) {
+        content.classList.remove("hidden");
+      } else {
+        content.classList.add("hidden");
+      }
+    });
+  }
+</script>
 {% endblock %}

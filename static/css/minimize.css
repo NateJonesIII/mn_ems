@@ -1,0 +1,29 @@
+/* Example CSS - Modify as needed */
+#aside-menu {
+    transition: width 0.3s ease;
+  }
+  
+  #aside-menu.minimized {
+    width: 64px; /* Adjust as needed */
+  }
+  
+  #aside-menu ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #aside-menu li {
+    margin-bottom: 8px;
+  }
+  
+  #aside-menu a {
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    color: white;
+  }
+  
+  #aside-menu .icon {
+    margin-right: 8px;
+  }
+  

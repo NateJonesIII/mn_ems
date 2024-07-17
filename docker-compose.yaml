@@ -14,7 +14,7 @@ services:
       - "5432:5432"
 
   web:
-    image: jonesledocker/mn_ems:v2
+    image: jonesledocker/mn_ems:v2.5
     build: .
     command: python run.py
     volumes:

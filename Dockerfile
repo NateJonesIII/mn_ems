@@ -6,6 +6,7 @@ FROM python:3.9-slim
 # Set environment variables for Python
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV PORT=8000
 
 # Set working directory in the container
 WORKDIR /app

@@ -302,7 +302,7 @@ GitHub.sublime-settings
 .history
 
 # tailwind
-tailwind.config.js
+#tailwind.config.js
 
 # commands
 commands/

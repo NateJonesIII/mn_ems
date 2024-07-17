@@ -2,7 +2,9 @@
 {% extends "events/base.html" %} {% load static %} {% block content %}
 <div class="container mx-auto flex flex-col md:flex-row">
   <!-- Aside Navigation -->
-  <aside class="md:w-1/4 bg-gray-100 p-4 rounded-lg shadow-lg hidden md:block">
+  <aside
+    class="md:w-1/4 bg-gray-100 p-4 mt-7 rounded-lg shadow-lg hidden md:block"
+  >
     <nav>
       <ul class="space-y-2">
         <li>
@@ -39,7 +41,7 @@
     <!-- Profile Content -->
     <div id="profile-content">
       <div
-        class="relative bg-cover bg-center h-64 rounded-lg shadow-lg overflow-hidden"
+        class="relative bg-cover bg-center h-32 md:h-64 rounded-lg shadow-lg overflow-hidden"
         style="background-image: url('{% static 'images/mia_bg_p.jpg' %}')"
       >
         <div

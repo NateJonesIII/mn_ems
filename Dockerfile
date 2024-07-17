@@ -49,5 +49,5 @@ RUN python manage.py migrate
 EXPOSE 8000
 
 # Command to run the application
-CMD ["0.0.0.0:8000", "manage.py", "runserver","event_management_system.wsgi:application"]
+CMD ["python", "manage.py", "runserver","0.0.0.0:8000"]
 #"mnems-kw2es23pba-ue.a.run.app"

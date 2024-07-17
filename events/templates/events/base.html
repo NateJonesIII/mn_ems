@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MN the event ems</title>
+    <title>MN the event</title>
     {% load static %}
     <link
       rel="stylesheet"
@@ -28,20 +28,42 @@
         @apply text-blue-500;
         text-shadow: 0 0 8px #387e9b;
       }
+      /* Adjust logo size for mobile */
+      @media (max-width: 768px) {
+        .logo-img {
+          height: 10px; /* Adjust the height as needed */
+        }
+      }
+      /* Close button for mobile menu */
+      #mobile-menu-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 1rem;
+        cursor: pointer;
+      }
+      /* Ensure main content is pushed down to avoid overlap */
+      @media (min-width: 768px) {
+        body {
+          padding-top: 80px; /* Adjust this value to match the height of your fixed header */
+        }
+      }
     </style>
   </head>
   <body
     class="min-h-screen flex flex-col bg-cyan-700 bg-gradient-to-r from-cyan-700 to-pink-500"
   >
     <header>
-      <nav class="bg-black align-top mt-0 shadow-md rounded-md">
+      <nav
+        class="bg-black align-top mt-0 shadow-md rounded-md fixed top-0 left-0 w-full z-50"
+      >
         <div class="container mx-auto px-4">
           <div class="flex justify-between items-center py-4">
             <a href="{% url 'home' %}" class="flex items-center">
               <img
                 src="{% static 'images/mn_logo_nb.png' %}"
                 alt="Logo"
-                class="h-20 mr-3"
+                class="h-10 md:h-16 mr-3"
               />
               <span class="text-lg font-semibold text-white">EMS</span>
             </a>
@@ -95,6 +117,22 @@
           id="mobile-menu"
           class="fixed inset-0 bg-black bg-opacity-90 flex flex-col justify-center items-center hidden md:hidden z-50"
         >
+          <button id="mobile-menu-close" class="text-white focus:outline-none">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
           <a
             href="{% url 'home' %}"
             class="block px-4 py-2 text-white glow-pink text-2xl"
@@ -179,6 +217,12 @@
         .addEventListener("click", function () {
           var menu = document.getElementById("mobile-menu");
           menu.classList.toggle("hidden");
+        });
+      document
+        .getElementById("mobile-menu-close")
+        .addEventListener("click", function () {
+          var menu = document.getElementById("mobile-menu");
+          menu.classList.add("hidden");
         });
     </script>
   </body>

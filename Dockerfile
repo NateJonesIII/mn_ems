@@ -50,4 +50,9 @@ EXPOSE 8000
 
 # Command to run the application
 CMD ["python", "manage.py", "runserver","0.0.0.0:8000"]
+
+# Eastern region
 #"mnems-kw2es23pba-ue.a.run.app"
+
+# Central region
+# https://mn-ems-kw2es23pba-uc.a.run.app

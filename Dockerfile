@@ -49,4 +49,5 @@ RUN python manage.py migrate
 EXPOSE 8000
 
 # Command to run the application
-CMD ["gunicorn","--bind","0.0.0.0:8000", "python", "manage.py", "runserver","myproject.wsgi:application", "mnems-kw2es23pba-ue.a.run.app"]
+CMD ["gunicorn","--bind","0.0.0.0:8000", "python", "manage.py", "runserver","myproject.wsgi:application"]
+#"mnems-kw2es23pba-ue.a.run.app"

@@ -1,4 +1,4 @@
-# Event Management System
+# MN - The Event Management System
 
 ## Overview
 
